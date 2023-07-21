@@ -6,14 +6,11 @@
         <Nullable>enable</Nullable>
         <AssemblyName>StarshipEnterprise</AssemblyName>
         <LangVersion>latest</LangVersion>
-        <Optimize>False</Optimize>
+        <Optimize>true</Optimize>
         <DebugType>embedded</DebugType>
     </PropertyGroup>
     <ItemGroup>
       <Content Include=".github\workflows\build.yml" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Upgrades\Shields\" />
     </ItemGroup>
 
     <Import Project="..\btd6.targets" />
