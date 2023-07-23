@@ -13,11 +13,14 @@ public class AntiprotonBeams : UpgradePlusPlus<PhaserPath>
 {
     public override int Tier => 6;
 
-    public override int Cost => 100000;
+    public override int Cost => 200000;
 
-    public override string Description => "Phasers become devastating powerful Antiproton beams, with crits strong enough to one-shot many Bloons";
+    public override string Description =>
+        "Phasers become devastating powerful Antiproton beams, with crits strong enough to one-shot many Bloons.";
 
     public override string Container => UpgradeContainerPlatinum;
+
+    public override string Icon => Name;
 
     public override void ApplyUpgrade(TowerModel towerModel)
     {
@@ -25,20 +28,20 @@ public class AntiprotonBeams : UpgradePlusPlus<PhaserPath>
         {
             lineEmission.displayPath.ApplyDisplay<AntiprotonBeam>();
             lineEmission.effectAtEndModel.ApplyDisplay<AntiProtonParticles>();
-            lineEmission.projectileInitialHitModel.ApplyDisplay<AntiprotonBlast>();
+            lineEmission.projectileInitialHitModel.GetBehavior<CreateEffectOnExhaustFractionModel>().effectModel
+                .ApplyDisplay<AntiprotonBlast>();
         }
-        
+
         towerModel.FindDescendants<ProjectileModel>("Phaser").ForEach(projectile =>
         {
             if (projectile.HasBehavior(out DamageModel damageModel))
             {
                 damageModel.damage *= 10;
             }
+
+            projectile.pierce *= 10;
         });
-        
-        towerModel.GetDescendants<CritMultiplierModel>().ForEach(crit =>
-        {
-            crit.damage *= 100;
-        });
+
+        towerModel.GetDescendants<CritMultiplierModel>().ForEach(crit => { crit.damage *= 100; });
     }
 }

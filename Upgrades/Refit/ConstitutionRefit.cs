@@ -1,5 +1,4 @@
-﻿using PathsPlusPlus;
-using StarshipEnterprise.Displays.Ships;
+﻿using StarshipEnterprise.Displays.Ships;
 
 namespace StarshipEnterprise.Upgrades.Refit;
 

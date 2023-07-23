@@ -8,7 +8,7 @@ namespace StarshipEnterprise.Upgrades.Science;
 
 public class SurgicalStrikes : CareerPathUpgrade<Science>
 {
-    public override int Cost => 500;
+    public override int Cost => 7000;
     public override int Tier => 3;
 
     public override string Description =>

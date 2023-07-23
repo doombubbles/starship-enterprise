@@ -16,6 +16,8 @@ public class HighYieldWarheads : ModUpgrade<StarshipEnterprise>
 
     public override string Description => "Torpedoes deal increased damage, and bonus damage to their primary target.";
 
+    public override string Icon => Name;
+    
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         var torpedoProj = towerModel.FindDescendant<ProjectileModel>("PhotonTorpedo");

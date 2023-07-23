@@ -11,8 +11,10 @@ public class FireAtWill : ModUpgrade<StarshipEnterprise>
 {
     public override int Path => TOP;
     public override int Tier => 3;
-    public override int Cost => 500;
+    public override int Cost => 3000;
 
+    public override string Icon => Name;
+    
     public override string Description => "Adds additional Phasers that fire at Strong and Close Bloons.";
 
     public override void ApplyUpgrade(TowerModel towerModel)

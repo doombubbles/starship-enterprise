@@ -11,6 +11,8 @@ public class OdysseyDisplay : ModCustomDisplay
 
     public override string PrefabName => "OdysseyClass";
 
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
+    
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {
         var renderer = node.GetMeshRenderer();

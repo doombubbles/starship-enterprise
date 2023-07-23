@@ -11,10 +11,12 @@ public class FasterArming : ModUpgrade<StarshipEnterprise>
 
     public override int Tier => 1;
 
-    public override int Cost => 500;
+    public override int Cost => 800;
 
-    public override string Description => "Torpedo reload time is decreased.";
+    public override string Description => "Torpedo take less time to reload time.";
 
+    public override string Icon => Name;
+    
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         towerModel.FindDescendant<WeaponModel>("PhotonTorpedo").Rate *= .8f;

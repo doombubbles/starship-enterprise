@@ -11,6 +11,8 @@ public class ExcelsiorDisplay : ModCustomDisplay
 
     public override string PrefabName => "ExcelsiorClass";
     
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
+    
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {
         var renderer = node.GetMeshRenderer();

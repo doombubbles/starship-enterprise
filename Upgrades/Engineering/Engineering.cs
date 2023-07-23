@@ -8,6 +8,7 @@ using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Attack;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Attack.Behaviors;
+using Il2CppAssets.Scripts.Models.Towers.Filters;
 using Il2CppAssets.Scripts.Models.Towers.Weapons;
 using Il2CppAssets.Scripts.Simulation.SMath;
 using Il2CppAssets.Scripts.Simulation.Towers.Behaviors;
@@ -45,11 +46,15 @@ public class Engineering : CareerPath
 
         shuttle.AddBehavior(new AttackModel("", new Il2CppReferenceArray<WeaponModel>(0), 2000f, new Model[]
         {
-            targetProvider
+            targetProvider,
+            new AttackFilterModel("", new[]
+            {
+                new FilterInvisibleModel("", true, false)
+            })
         }, targetProvider, 0, 0, 0, true, false, 0, false, 0));
 
         shuttle.UpdateTargetProviders();
-        
+
         return shuttle;
     }
 
@@ -90,7 +95,7 @@ public class Engineering : CareerPath
             {
                 var newAttack = attack.Duplicate();
                 var newWeapon = newAttack.GetChild<WeaponModel>();
-                newWeapon.Rate *= factor;
+                newWeapon.Rate *= factor + i * .1f;
                 newWeapon.SetEject(new Vector3(0, 10, 5));
                 shuttle.AddBehavior(newAttack);
             }

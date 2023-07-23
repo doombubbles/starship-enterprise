@@ -10,7 +10,8 @@ public class PhaseTurret : ModUpgrade<StarshipEnterprise>
 {
     public override int Path => BOTTOM;
     public override int Tier => 3;
-    public override int Cost => 500;
+    public override int Cost => 3600;
+    public override string Icon => Name;
 
     public override string Description => "Phase Cannons fire much faster and with a 360 degree attack angle.";
 
@@ -18,6 +19,6 @@ public class PhaseTurret : ModUpgrade<StarshipEnterprise>
     {
         var phaseCannonAttack = towerModel.GetAttackModel("PhaseCannon");
         phaseCannonAttack.GetDescendant<FilterTargetAngleModel>().fieldOfView = 360;
-        phaseCannonAttack.GetChild<WeaponModel>().Rate /= 2;
+        phaseCannonAttack.GetChild<WeaponModel>().Rate /= 3;
     }
 }

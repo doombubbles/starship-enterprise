@@ -5,7 +5,7 @@ namespace StarshipEnterprise.Upgrades.Engineering;
 
 public class ShuttleSquadron : CareerPathUpgrade<Engineering>
 {
-    public override int Cost => 500;
+    public override int Cost => 50000;
     public override int Tier => 5;
 
     public override string Description => base.Description + "Now deploys 5 total Shuttles.";

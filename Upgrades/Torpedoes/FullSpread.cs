@@ -11,10 +11,12 @@ public class FullSpread : ModUpgrade<StarshipEnterprise>
 
     public override int Tier => 3;
 
-    public override int Cost => 500;
+    public override int Cost => 2300;
 
     public override string Description => "Torpedoes now fire in bursts of 3 in a wide arc.";
 
+    public override string Icon => Name;
+    
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         var emission = towerModel.FindDescendant<RandomArcEmissionModel>("PhotonTorpedo");

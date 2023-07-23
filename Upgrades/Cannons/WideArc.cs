@@ -9,7 +9,8 @@ public class WideArc : ModUpgrade<StarshipEnterprise>
 {
     public override int Path => BOTTOM;
     public override int Tier => 1;
-    public override int Cost => 500;
+    public override int Cost => 180;
+    public override string Icon => Name;
 
     public override string Description => "Phase Cannon attack angle increased from 90 degrees to 180.";
 

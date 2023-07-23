@@ -11,6 +11,8 @@ public class ShuttleDisplay : ModCustomDisplay
 
     public override string PrefabName => "Shuttle";
     
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
+    
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {
         var renderer = node.GetMeshRenderer();

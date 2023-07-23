@@ -5,7 +5,7 @@ namespace StarshipEnterprise.Upgrades.Engineering;
 
 public class DeployRunabouts : CareerPathUpgrade<Engineering>
 {
-    public override int Cost => 500;
+    public override int Cost => 4000;
     public override int Tier => 3;
 
     public override string Description =>

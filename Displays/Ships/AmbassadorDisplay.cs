@@ -11,6 +11,8 @@ public class AmbassadorDisplay : ModCustomDisplay
 
     public override string PrefabName => "AmbassadorClass";
 
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
+
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {
         var renderer = node.GetMeshRenderer();

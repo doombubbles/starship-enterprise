@@ -5,7 +5,7 @@ namespace StarshipEnterprise.Upgrades;
 
 public abstract class CareerPathUpgrade<T> : UpgradePlusPlus<T> where T : CareerPath
 {
-    public override string Description => Path.Name + " Officer - " + Title + "\n";
+    public override string Description => Path.Name + " Officer - <b>" + Title + "</b>\n";
 
     private string Title => Tier switch
     {

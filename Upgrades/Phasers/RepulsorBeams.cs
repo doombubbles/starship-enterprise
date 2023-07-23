@@ -11,12 +11,11 @@ namespace StarshipEnterprise.Upgrades.Phasers;
 public class RepulsorBeams : ModUpgrade<StarshipEnterprise>
 {
     public override int Path => TOP;
-
     public override int Tier => 2;
+    public override int Cost => 1300;
+    public override string Icon => Name;
 
-    public override int Cost => 500;
-
-    public override string Description => "Phaser Beams slightly knock back Bloons.";
+    public override string Description => "Phaser Beams deal more damage, and will push back Bloons.";
 
     public override void ApplyUpgrade(TowerModel towerModel)
     {
@@ -29,6 +28,7 @@ public class RepulsorBeams : ModUpgrade<StarshipEnterprise>
 
         towerModel.FindDescendants<ProjectileModel>("Phaser").ForEach(projectile =>
         {
+            projectile.GetDamageModel().damage++;
             projectile.AddBehavior(knockback.Duplicate());
             projectile.UpdateCollisionPassList();
         });

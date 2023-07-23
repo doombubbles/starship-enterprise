@@ -6,7 +6,7 @@ namespace StarshipEnterprise.Upgrades.Tactical;
 
 public class AttackPatternAlpha : CareerPathUpgrade<Tactical>
 {
-    public override int Cost => 500;
+    public override int Cost => 1000;
     public override int Tier => 1;
 
     public override string Description =>

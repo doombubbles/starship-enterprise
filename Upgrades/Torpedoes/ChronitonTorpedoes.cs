@@ -14,11 +14,13 @@ public class ChronitonTorpedoes : ModUpgrade<StarshipEnterprise>
 
     public override int Tier => 4;
 
-    public override int Cost => 500;
+    public override int Cost => 12345;
 
     public override string Description =>
-        "Imbue Torpedoes with Chroniton particles, making them greatly slow hit Bloons.";
+        "Imbue Torpedoes with Chroniton particles, giving them more pierce and making them greatly slow hit Bloons.";
 
+    public override string Icon => Name;
+    
     public override void Register()
     {
         base.Register();

@@ -8,10 +8,10 @@ namespace StarshipEnterprise.Upgrades.Tactical;
 
 public class ResistanceIsFutile : CareerPathUpgrade<Tactical>
 {
-    public override int Cost => 500;
+    public override int Cost => 42000;
     public override int Tier => 5;
 
-    public override string Description => base.Description + "Enterprise attacks do bonus damage to Moab-Class Bloons.";
+    public override string Description => base.Description + "Enterprise's attacks do bonus damage to Moab-Class Bloons.";
 
     public override void ApplyUpgrade(TowerModel towerModel)
     {

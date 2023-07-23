@@ -11,6 +11,8 @@ public class ConstitutionDisplay : ModCustomDisplay
 
     public override string PrefabName => "ConstitutionClass";
 
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
+    
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {
         var renderer = node.GetMeshRenderer();

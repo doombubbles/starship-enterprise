@@ -4,6 +4,7 @@ using System.Linq;
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
+using Il2Cpp;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Attack;
@@ -30,9 +31,9 @@ public class Science : CareerPath
 
     protected override int Order => 3;
 
-    public static void PrimeDirectiveTech(TowerModel towerModel, int tier)
+    public static bool PrimeDirectiveTech(TowerModel towerModel, int tier)
     {
-        if (!PrimeDirectiveModes.TryGetValue(towerModel.baseId, out var mode)) return;
+        if (!PrimeDirectiveModes.TryGetValue(towerModel.baseId, out var mode)) return false;
 
         var towerToAddTo = mode switch
         {
@@ -93,6 +94,10 @@ public class Science : CareerPath
 
                 break;
         }
+        
+        attackModel.GetDescendants<FilterInvisibleModel>().ForEach(model => model.isActive = false);
+        attackModel.GetDescendants<DamageModel>().ForEach(model => model.immuneBloonProperties = BloonProperties.None);
+        
 
         if (towerToAddTo.GetDescendants<TargetSupplierModel>().Any(model =>
                 model.GetName() == "Close" || model.Is<TargetSelectedPointModel>()))
@@ -117,7 +122,7 @@ public class Science : CareerPath
         {
             eject = towerToAddTo.FindDescendants<WeaponModel>().Skip(1).First().GetEject();
         }
-        eject.y -= 5;
+        eject.y -= 1;
 
         foreach (var weapon in attackModel.weapons)
         {
@@ -164,7 +169,7 @@ public class Science : CareerPath
                 weaponModel.projectile.RemoveBehavior<TravelStraitModel>();
                 weaponModel.projectile.RemoveBehavior<TrackTargetModel>();
                 towerToAddTo.GetAttackModel().AddWeapon(weaponModel);
-                return;
+                return true;
             case PrimeDirectiveMode.PhotonTorpedoOnTarget:
                 attackModel.GetChild<WeaponModel>().SetEmission(new InstantDamageEmissionModel("", null));
                 weaponModel.projectile.AddBehavior(new InstantModel("", true));
@@ -209,6 +214,7 @@ public class Science : CareerPath
         }
 
         towerToAddTo.AddBehavior(attackModel);
+        return true;
     }
 
     private static TowerModel GetEnterprise(int t1, int t2, int t3)

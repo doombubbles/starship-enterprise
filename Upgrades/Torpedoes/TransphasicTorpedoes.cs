@@ -15,10 +15,12 @@ public class TransphasicTorpedoes : UpgradePlusPlus<PhotonTorpedoPath>
     public override int Cost => 275000;
 
     public override string Description =>
-        "Torpedoes now phase through Bloon layers, dealing massive damage to all layers at the same time";
+        "Torpedoes now phase through Bloon layers, dealing massive damage to all layers at the same time.";
 
     public override string Container => UpgradeContainerPlatinum;
 
+    public override string Icon => Name;
+    
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         towerModel.FindDescendants<ProjectileModel>("PhotonTorpedo").ForEach(model =>

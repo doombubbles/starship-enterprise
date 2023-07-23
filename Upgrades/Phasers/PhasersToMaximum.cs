@@ -12,7 +12,8 @@ public class PhasersToMaximum : ModUpgrade<StarshipEnterprise>
 {
     public override int Path => TOP;
     public override int Tier => 5;
-    public override int Cost => 50000;
+    public override int Cost => 40000;
+    public override string Icon => Name;
 
     public override string Description =>
         "Sets Phasers to their maximum power setting, dealing immense damage and crits.";
@@ -22,9 +23,9 @@ public class PhasersToMaximum : ModUpgrade<StarshipEnterprise>
         foreach (var damageModel in towerModel.FindDescendants<ProjectileModel>("Phaser")
                      .SelectMany(model => model.FindDescendants<DamageModel>()))
         {
-            damageModel.damage *= 2;
+            damageModel.damage *= 4;
         }
 
-        towerModel.GetDescendants<CritMultiplierModel>().ForEach(model => model.damage *= 2);
+        towerModel.GetDescendants<CritMultiplierModel>().ForEach(model => model.damage *= 4);
     }
 }

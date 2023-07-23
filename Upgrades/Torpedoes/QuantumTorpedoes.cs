@@ -4,7 +4,6 @@ using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.Weapons;
-using StarshipEnterprise.Displays;
 using StarshipEnterprise.Displays.Weapons;
 
 namespace StarshipEnterprise.Upgrades.Torpedoes;
@@ -15,10 +14,12 @@ public class QuantumTorpedoes : ModUpgrade<StarshipEnterprise>
 
     public override int Tier => 5;
 
-    public override int Cost => 50000;
+    public override int Cost => 52000;
 
     public override string Description =>
         "Upgrade Photon Torpedoes to powerful Quantum Torpedoes. Explosion damage, radius and pierce increased.";
+
+    public override string Icon => Name;
 
     public override void ApplyUpgrade(TowerModel towerModel)
     {

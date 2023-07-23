@@ -10,6 +10,8 @@ public class ConstitutionIIDisplay : ModCustomDisplay
     public override string AssetBundleName => "assets";
 
     public override string PrefabName => "RefitConstitutionClass";
+    
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
 
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {

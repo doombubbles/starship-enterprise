@@ -10,7 +10,7 @@ namespace StarshipEnterprise.Upgrades.Engineering;
 
 public class AuxiliaryPower : CareerPathUpgrade<Engineering>
 {
-    public override int Cost => 500;
+    public override int Cost => 1000;
     public override int Tier => 2;
 
     public override string Description => base.Description + "Boost the power of Enterprise's least upgraded weapon.";

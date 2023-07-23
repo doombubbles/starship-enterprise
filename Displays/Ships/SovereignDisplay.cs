@@ -10,6 +10,8 @@ public class SovereignDisplay : ModCustomDisplay
     public override string AssetBundleName => "assets";
     
     public override string PrefabName => "SovereignClass";
+    
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
 
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {

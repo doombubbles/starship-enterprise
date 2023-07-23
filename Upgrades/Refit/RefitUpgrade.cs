@@ -36,6 +36,8 @@ public abstract class RefitUpgrade : UpgradePlusPlus<RefitPath>
 
             towerModel.GetDescendants<WeaponModel>()
                 .ForEach(weapon => weapon.SetEject(EjectOffset, ignoreX: true));
+            
+            towerModel.portrait = PortraitReference;
         }
 
         towerModel.GetDescendants<ProjectileModel>()

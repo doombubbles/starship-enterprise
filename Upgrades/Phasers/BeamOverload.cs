@@ -21,11 +21,13 @@ public class BeamOverload : ModUpgrade<StarshipEnterprise>
 
     public override int Tier => 4;
 
-    public override int Cost => 500;
+    public override int Cost => 8000;
+    
+    public override string Icon => Name;
 
     public override string Description =>
         "Phaser Beams create a burst of energy on contact with Bloons, also damaging other Bloons nearby.";
-
+    
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         towerModel.GetDescendants<LineProjectileEmissionModel>().ForEach(emission =>
@@ -34,12 +36,12 @@ public class BeamOverload : ModUpgrade<StarshipEnterprise>
             {
                 new FilterInvisibleModel("", true, false)
             };
-            var proj = new ProjectileModel(CreatePrefabReference(""), "PhaserBlast", 10, 0, 20, 0, new Model[]
+            var proj = new ProjectileModel(CreatePrefabReference(""), "PhaserBlast", 10, 0, 25, 0, new Model[]
             {
                 new DisplayModel("PhaserBlast", CreatePrefabReference(""), 0, DisplayCategory.Projectile),
                 new AgeModel("PhaserBlast", .2f, 0, false, null),
                 new ProjectileFilterModel("PhaserBlast", filters),
-                new DamageModel("PhaserBlast", 1, 0, true, false, true, BloonProperties.Purple, BloonProperties.Purple),
+                new DamageModel("PhaserBlast", 2, 0, true, false, true, BloonProperties.Purple, BloonProperties.Purple),
                 new CreateEffectOnExhaustFractionModel("PhaserBlast", CreatePrefabReference(null),
                     new EffectModel("", CreatePrefabReference<PhaserBlast>(), 1, .2f, Fullscreen.No, false, false,
                         false, false, false, false), .2f, Fullscreen.No, 0, 1, true)

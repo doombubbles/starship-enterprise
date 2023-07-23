@@ -10,8 +10,8 @@ namespace StarshipEnterprise.Upgrades.Cannons;
 public class PolaronCannons : UpgradePlusPlus<PhaseCannonPath>
 {
     public override int Cost => 160000;
-
     public override int Tier => 6;
+    public override string Icon => Name;
 
     public override string Description => "Upgrade to Polaron Cannons, dealing massive damage with unlimited pierce.";
 
@@ -25,7 +25,7 @@ public class PolaronCannons : UpgradePlusPlus<PhaseCannonPath>
             projectile.ignorePierceExhaustion = true;
             if (projectile.HasBehavior(out DamageModel damageModel))
             {
-                damageModel.damage *= 5;
+                damageModel.damage *= 6;
             }
         });
     }

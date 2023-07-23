@@ -90,7 +90,9 @@ public class StarshipEnterprise : ModTower<Starfleet>
 
         towerModel.UpdateTargetProviders();
 
-        // towerModel.display = towerModel.GetBehavior<DisplayModel>().display = CreatePrefabReference(""); // TODO
+        towerModel.ApplyDisplay<StarfleetBase>();
+        towerModel.RemoveBehavior<RectangleFootprintModel>();
+        towerModel.AddBehavior(new CircleFootprintModel("", 12, false, false, false));
 
         var dartMonkey = Game.instance.model.GetTowerFromId(TowerType.DartMonkey);
 

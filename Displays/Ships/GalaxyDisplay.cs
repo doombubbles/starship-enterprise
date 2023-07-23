@@ -10,6 +10,8 @@ public class GalaxyDisplay : ModCustomDisplay
     public override string AssetBundleName => "assets";
 
     public override string PrefabName => "GalaxyClass";
+    
+    public override float Scale => StarshipEnterpriseMod.EnterpriseDisplayScale;
 
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {

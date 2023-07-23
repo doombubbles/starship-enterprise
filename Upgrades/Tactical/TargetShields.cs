@@ -8,7 +8,7 @@ namespace StarshipEnterprise.Upgrades.Tactical;
 
 public class TargetShields : CareerPathUpgrade<Tactical>
 {
-    public override int Cost => 500;
+    public override int Cost => 2700;
     public override int Tier => 3;
 
     public override string Description =>

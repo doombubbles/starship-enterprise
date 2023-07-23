@@ -18,7 +18,15 @@ public class StarshipEnterpriseMod : BloonsTD6Mod
 {
     public static readonly ModSettingHotkey EnterpriseHotkey = new(KeyCode.E, HotkeyModifier.Shift);
 
-    // TODO better way to affect TowerManager.CreateTower
+    public static readonly ModSettingDouble EnterpriseDisplayScale = new(1)
+    {
+        slider = true,
+        stepSize = .01f,
+        min = 0.5f,
+        max = 1
+    };
+
+    // TODO better way to affect TowerManager.CreateTower ?
 
     private static bool roundNextValue;
 

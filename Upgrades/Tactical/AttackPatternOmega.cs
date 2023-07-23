@@ -8,10 +8,10 @@ namespace StarshipEnterprise.Upgrades.Tactical;
 
 public class AttackPatternOmega : CareerPathUpgrade<Tactical>
 {
-    public override int Cost => 500;
+    public override int Cost => 240000;
     public override int Tier => 6;
 
-    public override string Description => base.Description + "Attacks do bonus damage based on maximum HP of Bloons.";
+    public override string Description => base.Description + "Enterprise's attacks do bonus damage based on maximum HP of Bloons.";
 
     public override void ApplyUpgrade(TowerModel towerModel)
     {
@@ -19,7 +19,7 @@ public class AttackPatternOmega : CareerPathUpgrade<Tactical>
         {
             if (projectile.HasBehavior<DamageModel>())
             {
-                projectile.AddBehavior(new DamagePercentOfMaxModel("", .05f, new Il2CppStringArray(0), false));
+                projectile.AddBehavior(new DamagePercentOfMaxModel("", .005f, new Il2CppStringArray(0), false));
             }
         });
     }

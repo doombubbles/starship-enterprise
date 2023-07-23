@@ -6,11 +6,11 @@ namespace StarshipEnterprise.Upgrades.Science;
 
 public class ScanForLifeForms : CareerPathUpgrade<Science>
 {
-    public override int Cost => 500;
-    public override int Tier => 1;
+    public override int Cost => 1700;
+    public override int Tier => 2;
 
     public override string Description =>
-        base.Description + "Careful scanning allows Enterprise to see and pop Camo Bloons.";
+        base.Description + "Allows Enterprise to see and pop Camo Bloons.";
 
     public override void ApplyUpgrade(TowerModel towerModel)
     {

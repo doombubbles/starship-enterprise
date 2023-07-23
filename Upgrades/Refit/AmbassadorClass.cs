@@ -8,7 +8,7 @@ public class AmbassadorClass : RefitUpgrade<AmbassadorDisplay>
     public override int Cost => 7010;
     
     public override string Description => "Upgrade to the Enterprise-C, an Ambassador class starship.\n" +
-                                          "All attack damage increased.";
+                                          base.Description;
 
     public override float BuffFactor => .3f;
     
