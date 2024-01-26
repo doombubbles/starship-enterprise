@@ -55,7 +55,7 @@ public class StarshipEnterprise : ModTower<Starfleet>
 
     public static float Speed => 60f;
 
-    public override bool IsValidCrosspath(int[] tiers) =>
+    public override bool IsValidCrosspath(params int[] tiers) =>
         base.IsValidCrosspath(tiers) || ModHelper.HasMod("UltimateCrosspathing");
 
     public override void ModifyBaseTowerModel(TowerModel towerModel)
@@ -68,7 +68,7 @@ public class StarshipEnterprise : ModTower<Starfleet>
         path.takeOffAnimTime = 0;
         path.bankRotation = 30;
 
-        var airAttack = towerModel.GetBehavior<AttackAirUnitModel>();
+        var airAttack = towerModel.GetBehaviors<AttackAirUnitModel>().MinBy(model => model.name.Length)!;
 
         airAttack.RemoveChildDependants(airAttack.behaviors);
         airAttack.behaviors = new[]

@@ -227,19 +227,19 @@ public class Science : CareerPath
             enterprise = enterprise.Duplicate();
         }
 
-        foreach (var u in GetInstance<PhaserPath>().Upgrades.Where(u => u != null && u.Tier <= t1))
+        foreach (var u in GetInstance<PhaserPath>().Upgrades.Values.Where(u => u.Tier <= t1))
         {
             u!.ApplyUpgrade(enterprise);
             u.ApplyUpgrade(enterprise, t1);
         }
 
-        foreach (var u in GetInstance<PhotonTorpedoPath>().Upgrades.Where(u => u != null && u.Tier <= t2))
+        foreach (var u in GetInstance<PhotonTorpedoPath>().Upgrades.Values.Where(u => u.Tier <= t2))
         {
             u!.ApplyUpgrade(enterprise);
             u.ApplyUpgrade(enterprise, t2);
         }
 
-        foreach (var u in GetInstance<PhaseCannonPath>().Upgrades.Where(u => u != null && u.Tier <= t3))
+        foreach (var u in GetInstance<PhaseCannonPath>().Upgrades.Values.Where(u => u.Tier <= t3))
         {
             u!.ApplyUpgrade(enterprise);
             u.ApplyUpgrade(enterprise, t3);

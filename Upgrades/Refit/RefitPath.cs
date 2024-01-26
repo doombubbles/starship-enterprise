@@ -10,5 +10,5 @@ public class RefitPath : PathPlusPlus<StarshipEnterprise>
     
     public override bool ValidTiers(int[] tiers) => true;
 
-    protected override int Priority => -100;
+    protected override int Priority => 100;
 }
