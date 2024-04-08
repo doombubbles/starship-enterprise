@@ -1,5 +1,4 @@
-﻿using BTD_Mod_Helper.Api.Enums;
-using BTD_Mod_Helper.Extensions;
+﻿using BTD_Mod_Helper.Extensions;
 using Il2Cpp;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;

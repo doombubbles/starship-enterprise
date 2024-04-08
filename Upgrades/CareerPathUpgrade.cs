@@ -1,5 +1,4 @@
-﻿using Il2CppAssets.Scripts.Simulation.SMath;
-using PathsPlusPlus;
+﻿using PathsPlusPlus;
 
 namespace StarshipEnterprise.Upgrades;
 

@@ -3,15 +3,13 @@ using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2CppAssets.Scripts.Models;
 using Il2CppAssets.Scripts.Models.Audio;
-using Il2CppAssets.Scripts.Models.GenericBehaviors;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Abilities;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Abilities.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.TowerFilters;
 using Il2CppAssets.Scripts.Simulation.Towers.Behaviors.Abilities.Behaviors;
-using Il2CppAssets.Scripts.Utils;
-using StarshipEnterprise.Displays;
+using Il2CppNinjaKiwi.Common.ResourceUtils;
 
 namespace StarshipEnterprise.Upgrades.Tactical;
 

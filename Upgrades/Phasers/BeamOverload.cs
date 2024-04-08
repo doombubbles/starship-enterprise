@@ -10,7 +10,6 @@ using Il2CppAssets.Scripts.Models.Towers.Behaviors.Emissions;
 using Il2CppAssets.Scripts.Models.Towers.Filters;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;
-using StarshipEnterprise.Displays;
 using StarshipEnterprise.Displays.Weapons;
 
 namespace StarshipEnterprise.Upgrades.Phasers;

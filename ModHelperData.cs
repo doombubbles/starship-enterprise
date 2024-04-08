@@ -2,8 +2,8 @@ namespace StarshipEnterprise;
 
 public static class ModHelperData
 {
-    public const string WorksOnVersion = "39.0";
-    public const string Version = "1.0.0-alpha";
+    public const string WorksOnVersion = "42.0";
+    public const string Version = "1.0.0";
     public const string Name = "Starship Enterprise";
 
     public const string Description =

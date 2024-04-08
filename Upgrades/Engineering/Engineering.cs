@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BTD_Mod_Helper.Api.Display;
 using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
@@ -13,8 +12,8 @@ using Il2CppAssets.Scripts.Models.Towers.Weapons;
 using Il2CppAssets.Scripts.Simulation.SMath;
 using Il2CppAssets.Scripts.Simulation.Towers.Behaviors;
 using Il2CppAssets.Scripts.Unity;
-using Il2CppAssets.Scripts.Utils;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Il2CppNinjaKiwi.Common.ResourceUtils;
 
 namespace StarshipEnterprise.Upgrades.Engineering;
 

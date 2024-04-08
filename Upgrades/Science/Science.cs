@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BTD_Mod_Helper;
 using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2Cpp;
@@ -16,9 +15,7 @@ using Il2CppAssets.Scripts.Models.Towers.Projectiles;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Il2CppAssets.Scripts.Models.Towers.Weapons;
 using Il2CppAssets.Scripts.Models.Towers.Weapons.Behaviors;
-using Il2CppAssets.Scripts.Simulation.Towers;
 using Il2CppAssets.Scripts.Simulation.Towers.Behaviors;
-using Il2CppSystem.Linq;
 using StarshipEnterprise.Upgrades.Cannons;
 using StarshipEnterprise.Upgrades.Phasers;
 using StarshipEnterprise.Upgrades.Torpedoes;

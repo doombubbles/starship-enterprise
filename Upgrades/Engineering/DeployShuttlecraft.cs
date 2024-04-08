@@ -1,6 +1,4 @@
-﻿using BTD_Mod_Helper;
-using HarmonyLib;
-using Il2CppAssets.Scripts.Models.Towers;
+﻿using Il2CppAssets.Scripts.Models.Towers;
 using StarshipEnterprise.Displays.Ships;
 
 namespace StarshipEnterprise.Upgrades.Engineering;
