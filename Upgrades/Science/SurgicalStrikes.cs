@@ -2,6 +2,7 @@
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppSystem.Collections.Generic;
 
 namespace StarshipEnterprise.Upgrades.Science;
@@ -21,7 +22,7 @@ public class SurgicalStrikes : CareerPathUpgrade<Science>
             if (projectile.HasBehavior<DamageModel>())
             {
                 projectile.AddBehavior(new RemoveBloonModifiersModel("", true, true, false, true, true,
-                    new List<string>()));
+                    new Il2CppStringArray(0), new Il2CppStringArray(0)));
                 projectile.UpdateCollisionPassList();
             }
         });

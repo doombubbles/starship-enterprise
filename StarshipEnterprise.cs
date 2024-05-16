@@ -94,6 +94,7 @@ public class StarshipEnterprise : ModTower<Starfleet>
         towerModel.RemoveBehaviors<CreateSoundOnTowerPlaceModel>();
         towerModel.AddBehavior(dartMonkey.GetBehavior<CreateSoundOnTowerPlaceModel>().Duplicate(towerModel.name));
 
+        airAttack.RemoveWeapon(airAttack.weapons[0]);
         towerModel.RemoveBehavior(towerModel.GetAttackModel("Spectre"));
 
         // Phasers
