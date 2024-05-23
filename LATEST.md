@@ -1,1 +1,1 @@
-- Fixes for v42.1
+- Fixed Starship Enterprise's "Always Cost $1701" feature causing issues placing the tower for Hard and Impoppable difficulties

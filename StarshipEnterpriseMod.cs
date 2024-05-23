@@ -2,6 +2,7 @@ using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api;
 using BTD_Mod_Helper.Api.ModOptions;
 using HarmonyLib;
+using Il2CppAssets.Scripts.Models;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Simulation.Input;
 using Il2CppAssets.Scripts.Simulation.SMath;
@@ -28,11 +29,19 @@ public class StarshipEnterpriseMod : BloonsTD6Mod
 
     // TODO better way to affect TowerManager.CreateTower ?
 
-    private static bool roundNextValue;
+    private static bool dontRoundNextValue;
 
     public override void OnFixedUpdate()
     {
-        roundNextValue = false;
+        dontRoundNextValue = false;
+    }
+
+    public override void OnNewGameModel(GameModel result)
+    {
+        foreach (var towerModel in result.GetTowersWithBaseId(ModContent.TowerID<StarshipEnterprise>()))
+        {
+            towerModel.cost = 1701;
+        }
     }
 
     [HarmonyPatch(typeof(TowerInventory), nameof(TowerInventory.GetTowerCost))]
@@ -47,14 +56,14 @@ public class StarshipEnterpriseMod : BloonsTD6Mod
             }
         }
     }
-
+    
     [HarmonyPatch(typeof(TowerInventory), nameof(TowerInventory.IsFreeTowerAvailable))]
     internal static class TowerInventory_IsFreeTowerAvailable
     {
         [HarmonyPostfix]
         private static void Postfix(TowerModel towerModel, bool __result)
         {
-            roundNextValue = towerModel.baseId == ModContent.TowerID<StarshipEnterprise>() && !__result;
+            dontRoundNextValue = towerModel.baseId == ModContent.TowerID<StarshipEnterprise>() && !__result;
         }
     }
 
@@ -65,13 +74,13 @@ public class StarshipEnterpriseMod : BloonsTD6Mod
         private static bool Prefix(ref int __result, int nearestIntValue)
         {
             var result = true;
-            if (roundNextValue && nearestIntValue == 5)
+            if (dontRoundNextValue && nearestIntValue == 5)
             {
                 __result = 1701;
                 result = false;
             }
 
-            roundNextValue = false;
+            dontRoundNextValue = false;
             return result;
         }
     }
