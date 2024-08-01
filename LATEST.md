@@ -1,1 +1,2 @@
-- Fixed Starship Enterprise's "Always Cost $1701" feature causing issues placing the tower for Hard and Impoppable difficulties
+- Fixed for BTD6 v44
+    - Note: Mod Helper 3.1.23 or higher fixes the ApplyOutlineShader visual error

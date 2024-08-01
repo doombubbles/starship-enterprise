@@ -161,7 +161,7 @@ public class Science : CareerPath
                 break;
             case PrimeDirectiveMode.PhotonTorpedoOnPoint:
                 weaponModel.SetEmission(towerToAddTo.GetDescendant<RandomTargetSpreadModel>().Duplicate());
-                weaponModel.projectile.AddBehavior(new InstantModel("", true));
+                weaponModel.projectile.AddBehavior(new InstantModel("", true, false, false));
                 weaponModel.projectile.AddBehavior(new AgeModel("", .1f, 0, false, null));
                 weaponModel.projectile.RemoveBehavior<TravelStraitModel>();
                 weaponModel.projectile.RemoveBehavior<TrackTargetModel>();
@@ -169,7 +169,7 @@ public class Science : CareerPath
                 return true;
             case PrimeDirectiveMode.PhotonTorpedoOnTarget:
                 attackModel.GetChild<WeaponModel>().SetEmission(new InstantDamageEmissionModel("", null));
-                weaponModel.projectile.AddBehavior(new InstantModel("", true));
+                weaponModel.projectile.AddBehavior(new InstantModel("", true, false, false));
                 weaponModel.projectile.RemoveBehavior<TravelStraitModel>();
                 break;
             case PrimeDirectiveMode.PhaseCannonSpread:
