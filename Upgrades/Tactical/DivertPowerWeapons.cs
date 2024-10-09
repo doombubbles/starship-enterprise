@@ -38,7 +38,7 @@ public class DivertPowerWeapons : CareerPathUpgrade<Tactical>
                         Path.Tower
                     })
                 }, false),
-            new CreateSoundOnAbilityModel("", new SoundModel("", new AudioSourceReference
+            new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
             {
                 guidRef = "c72781a0643d41c4b976110d1516fabc" // ActivatedTurboChargeSound.prefab
             }), null, null)

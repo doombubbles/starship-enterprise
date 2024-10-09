@@ -39,7 +39,7 @@ public class RefuseThePrimeDirective : CareerPathUpgrade<Science>
                 {
                     new FilterInBaseTowerIdModel("", Science.PrimeDirectiveModes.Keys.ToArray())
                 }, false),
-            new CreateSoundOnAbilityModel("", new SoundModel("", new AudioSourceReference
+            new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
             {
                 guidRef = "8c509ff34947707469192054a463f6b7" // Assets/Monkeys/EngineerMonkey/SoundPrefabs/AbilityOverclock.prefab
             }), null, null)

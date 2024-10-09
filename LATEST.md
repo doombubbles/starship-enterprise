@@ -1,2 +1,1 @@
-- Fixed for BTD6 v44
-    - Note: Mod Helper 3.1.23 or higher fixes the ApplyOutlineShader visual error
+- Fixed for BTD6 v45
