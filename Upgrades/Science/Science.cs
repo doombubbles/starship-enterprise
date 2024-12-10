@@ -83,6 +83,7 @@ public class Science : CareerPath
                 {
                     emission.RemoveBehavior<EmissionRotationOffBloonDirectionModel>();
                 }
+
                 if (!towerToAddTo.HasBehavior<AirUnitModel>())
                 {
                     emission.spreadLength /= 2;
@@ -91,10 +92,10 @@ public class Science : CareerPath
 
                 break;
         }
-        
+
         attackModel.GetDescendants<FilterInvisibleModel>().ForEach(model => model.isActive = false);
         attackModel.GetDescendants<DamageModel>().ForEach(model => model.immuneBloonProperties = BloonProperties.None);
-        
+
 
         if (towerToAddTo.GetDescendants<TargetSupplierModel>().Any(model =>
                 model.GetName() == "Close" || model.Is<TargetSelectedPointModel>()))
@@ -119,6 +120,7 @@ public class Science : CareerPath
         {
             eject = towerToAddTo.FindDescendants<WeaponModel>().Skip(1).First().GetEject();
         }
+
         eject.y -= 1;
 
         foreach (var weapon in attackModel.weapons)
@@ -156,7 +158,7 @@ public class Science : CareerPath
                 var effect = weaponModel.GetDescendant<CreateEffectOnContactModel>().effectModel;
 
                 weaponModel.SetProjectile(explosion);
-                weaponModel.AddBehavior(new EjectEffectModel("", effect.assetId, effect, effect.lifespan,
+                weaponModel.AddBehavior(new EjectEffectModel("", effect, effect.lifespan,
                     effect.fullscreen, false, false, false, false));
                 break;
             case PrimeDirectiveMode.PhotonTorpedoOnPoint:
@@ -284,8 +286,8 @@ public class Science : CareerPath
         { TowerType.Sauda, PrimeDirectiveMode.PhotonTorpedoOnTarget },
         { TowerType.Psi, PrimeDirectiveMode.Phaser },
         { TowerType.Geraldo, PrimeDirectiveMode.Phaser },
-        
-        
+
+
         { TowerType.SunAvatarMini, PrimeDirectiveMode.PhaseCannonSpread },
         { TowerType.TrueSunAvatarMini, PrimeDirectiveMode.PhaseCannonSpread },
         { TowerType.Sentry, PrimeDirectiveMode.Phaser },

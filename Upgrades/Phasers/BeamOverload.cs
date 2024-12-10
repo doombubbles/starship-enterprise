@@ -41,7 +41,7 @@ public class BeamOverload : ModUpgrade<StarshipEnterprise>
                 new AgeModel("PhaserBlast", .2f, 0, false, null),
                 new ProjectileFilterModel("PhaserBlast", filters),
                 new DamageModel("PhaserBlast", 2, 0, true, false, true, BloonProperties.Purple, BloonProperties.Purple, false),
-                new CreateEffectOnExhaustFractionModel("PhaserBlast", CreatePrefabReference(null),
+                new CreateEffectOnExhaustFractionModel("PhaserBlast", 
                     new EffectModel("", CreatePrefabReference<PhaserBlast>(), 1, .2f, Fullscreen.No, false, false,
                         false, false, false, false), .2f, Fullscreen.No, 0, 1, true)
             }, filters);
