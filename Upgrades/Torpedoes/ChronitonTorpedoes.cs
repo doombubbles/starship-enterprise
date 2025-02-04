@@ -35,7 +35,7 @@ public class ChronitonTorpedoes : ModUpgrade<StarshipEnterprise>
             proj.pierce *= 1.5f;
             
             proj.AddBehavior(new SlowModel("", .25f, 5, Name, 9999, "", true, false, null, false,
-                false, false));
+                false, false, 0));
 
             proj.AddBehavior(new SlowModifierForTagModel(Moab, Moab, Name, 1, false, false, .5f, false));
             proj.AddBehavior(new SlowModifierForTagModel(Bfb, Bfb, Name, 1, false, false, .3f, false));
