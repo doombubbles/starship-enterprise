@@ -134,7 +134,7 @@ public class StarshipEnterprise : ModTower<Starfleet>
         var ucav = etienne.GetDescendant<UCAVModel>().ucavTowerModel;
         var ucavAttack = ucav.GetAttackModel().Duplicate();
         var torpedoAttack = new AttackModel("PhotonTorpedo", ucavAttack.weapons, ucavAttack.range, ucavAttack.behaviors,
-            new TargetStrongAirUnitModel("", false, false), 0, 0, 0, true, false, 0, false, 0);
+            new TargetStrongAirUnitModel("", false, false), 0, 0, 0, true, false, 0, false, 0, false);
         var torpedoWeapon = torpedoAttack.GetChild<WeaponModel>().SetName("PhotonTorpedo");
         var torpedoProj = torpedoWeapon.projectile.SetName("PhotonTorpedo");
         var torpedoExplosion = torpedoProj.GetDescendant<ProjectileModel>().SetName("PhotonTorpedoExplosion");

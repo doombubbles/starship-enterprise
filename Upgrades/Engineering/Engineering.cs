@@ -50,7 +50,7 @@ public class Engineering : CareerPath
             {
                 new FilterInvisibleModel("", true, false)
             })
-        }, targetProvider, 0, 0, 0, true, false, 0, false, 0));
+        }, targetProvider, 0, 0, 0, true, false, 0, false, 0, false));
 
         shuttle.UpdateTargetProviders();
 
