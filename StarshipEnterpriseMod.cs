@@ -1,6 +1,7 @@
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api;
 using BTD_Mod_Helper.Api.ModOptions;
+using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2CppAssets.Scripts.Models;
 using Il2CppAssets.Scripts.Models.Towers;
@@ -10,6 +11,7 @@ using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using MelonLoader;
 using StarshipEnterprise;
 using UnityEngine;
+
 [assembly: MelonInfo(typeof(StarshipEnterpriseMod), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
 [assembly: MelonGame("Ninja Kiwi", "BloonsTD6")]
 
@@ -38,7 +40,7 @@ public class StarshipEnterpriseMod : BloonsTD6Mod
 
     public override void OnNewGameModel(GameModel result)
     {
-        foreach (var towerModel in result.GetTowersWithBaseId(ModContent.TowerID<StarshipEnterprise>()))
+        foreach (var towerModel in result.GetTowersWithBaseId(ModContent.TowerID<StarshipEnterprise>()).AsIEnumerable())
         {
             towerModel.cost = 1701;
         }
@@ -56,7 +58,7 @@ public class StarshipEnterpriseMod : BloonsTD6Mod
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(TowerInventory), nameof(TowerInventory.IsFreeTowerAvailable))]
     internal static class TowerInventory_IsFreeTowerAvailable
     {

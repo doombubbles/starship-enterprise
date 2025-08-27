@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BTD_Mod_Helper.Api.Display;
+using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2CppAssets.Scripts.Models;
@@ -43,14 +44,21 @@ public class Engineering : CareerPath
         fighterMovement.rollTimeBeforeNext = 1000000000;
         fighterMovement.bankAngleMax = 30;
 
-        shuttle.AddBehavior(new AttackModel("", new Il2CppReferenceArray<WeaponModel>(0), 2000f, new Model[]
+        shuttle.AddBehavior(new AttackHelper
+        {
+            Range = 2000,
+            AttackThroughWalls = true,
+            TargetProvider = targetProvider
+        });
+
+        /*shuttle.AddBehavior(new AttackModel("", new Il2CppReferenceArray<WeaponModel>(0), 2000f, new Model[]
         {
             targetProvider,
             new AttackFilterModel("", new[]
             {
                 new FilterInvisibleModel("", true, false)
             })
-        }, targetProvider, 0, 0, 0, true, false, 0, false, 0, false));
+        }, targetProvider, 0, 0, 0, true, false, 0, false, 0, false));*/
 
         shuttle.UpdateTargetProviders();
 
