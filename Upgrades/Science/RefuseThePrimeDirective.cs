@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BTD_Mod_Helper.Api.Display;
+using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2CppAssets.Scripts.Models;
@@ -31,21 +32,29 @@ public class RefuseThePrimeDirective : CareerPathUpgrade<Science>
     {
         var buffIcon = GetInstance<BuffIconRefuseThePrimeDirective>();
 
-        var ability = new AbilityModel(Name, DisplayName, Description, -1, 0, IconReference, 60f, new Model[]
+        towerModel.AddBehavior(new AbilityHelper(Name)
         {
-            new ActivateRateSupportZoneModel("", Name, true, 1f, 99999, 99999, false, 20f,
-                new DisplayModel("", CreatePrefabReference<PrimeDirectiveBuff>(), 0, DisplayCategory.Buff),
-                buffIcon.BuffLocsName, buffIcon.BuffIconName, new TowerFilterModel[]
+            DisplayName = DisplayName,
+            Description = Description,
+            Animation = -1,
+            IconReference = IconReference,
+            Cooldown = 60,
+            Behaviors =
+            [
+                new ActivateRateSupportZoneModel("", Name, true, 1f, 99999, 99999, false, 20f,
+                    new DisplayModel("", CreatePrefabReference<PrimeDirectiveBuff>(), 0, DisplayCategory.Buff),
+                    buffIcon.BuffLocsName, buffIcon.BuffIconName, new TowerFilterModel[]
+                    {
+                        new FilterInBaseTowerIdModel("", Science.PrimeDirectiveModes.Keys.ToArray())
+                    }, false),
+                new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
                 {
-                    new FilterInBaseTowerIdModel("", Science.PrimeDirectiveModes.Keys.ToArray())
-                }, false),
-            new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
-            {
-                guidRef = "8c509ff34947707469192054a463f6b7" // Assets/Monkeys/EngineerMonkey/SoundPrefabs/AbilityOverclock.prefab
-            }), null, null)
-        }, false, false, Id, 0, 0, -1, false, false);
-
-        towerModel.AddBehavior(ability);
+                    guidRef =
+                        "8c509ff34947707469192054a463f6b7" // Assets/Monkeys/EngineerMonkey/SoundPrefabs/AbilityOverclock.prefab
+                }), null, null)
+            ],
+            AddedViaUpgrade = Id
+        });
     }
 
     public class BuffIconRefuseThePrimeDirective : ModBuffIcon

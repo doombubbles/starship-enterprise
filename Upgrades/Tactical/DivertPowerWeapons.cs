@@ -1,4 +1,5 @@
 ﻿using BTD_Mod_Helper.Api.Display;
+using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Extensions;
 using HarmonyLib;
 using Il2CppAssets.Scripts.Models;
@@ -28,21 +29,30 @@ public class DivertPowerWeapons : CareerPathUpgrade<Tactical>
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         var buffIcon = GetInstance<BuffIconDivertPowerWeapons>();
-        towerModel.AddBehavior(new AbilityModel(Name, DisplayName, Description, -1, 0, IconReference, 60f, new Model[]
+        towerModel.AddBehavior(new AbilityHelper(Name)
         {
-            new ActivateRateSupportZoneModel(Name, Name, true, .5f, towerModel.radius, 1, true, 20f, null,
-                buffIcon.BuffLocsName, buffIcon.BuffIconName, new[]
-                {
-                    new FilterInBaseTowerIdModel("", new[]
+            DisplayName = DisplayName,
+            Description = Description,
+            Animation = -1,
+            IconReference = IconReference,
+            Cooldown = 60,
+            Behaviors =
+            [
+                new ActivateRateSupportZoneModel(Name, Name, true, .5f, towerModel.radius, 1, true, 20f, null,
+                    buffIcon.BuffLocsName, buffIcon.BuffIconName, new[]
                     {
-                        Path.Tower
-                    })
-                }, false),
-            new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
-            {
-                guidRef = "c72781a0643d41c4b976110d1516fabc" // ActivatedTurboChargeSound.prefab
-            }), null, null)
-        }, false, false, Id, 0f, 0, -1, false, false));
+                        new FilterInBaseTowerIdModel("", new[]
+                        {
+                            Path.Tower
+                        })
+                    }, false),
+                new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
+                {
+                    guidRef = "c72781a0643d41c4b976110d1516fabc" // ActivatedTurboChargeSound.prefab
+                }), null, null)
+            ],
+            AddedViaUpgrade = Id
+        });
     }
 
     public class BuffIconDivertPowerWeapons : ModBuffIcon
