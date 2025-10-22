@@ -1,5 +1,6 @@
 ﻿using BTD_Mod_Helper.Api.Towers;
 using BTD_Mod_Helper.Extensions;
+using Il2CppAssets.Scripts.Data;
 using Il2CppAssets.Scripts.Models.Towers;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles;
 using Il2CppAssets.Scripts.Models.Towers.Projectiles.Behaviors;
@@ -20,12 +21,13 @@ public class ChronitonTorpedoes : ModUpgrade<StarshipEnterprise>
         "Imbue Torpedoes with Chroniton particles, giving them more pierce and making them greatly slow hit Bloons.";
 
     public override string Icon => Name;
-    
+
     public override void Register()
     {
         base.Register();
 
-        BadImmunity.mutatorImmunityIds = BadImmunity.mutatorImmunityIds.AddTo(Name);
+        GameData.Instance.bloonMutatorData.badImmunityIds =
+            GameData.Instance.bloonMutatorData.badImmunityIds.AddTo(Name);
     }
 
     public override void ApplyUpgrade(TowerModel towerModel)
@@ -33,7 +35,7 @@ public class ChronitonTorpedoes : ModUpgrade<StarshipEnterprise>
         towerModel.FindDescendants<ProjectileModel>("PhotonTorpedo").ForEach(proj =>
         {
             proj.pierce *= 1.5f;
-            
+
             proj.AddBehavior(new SlowModel("", .25f, 5, Name, 9999, "", true, false, null, false,
                 false, false, 0));
 
@@ -41,7 +43,7 @@ public class ChronitonTorpedoes : ModUpgrade<StarshipEnterprise>
             proj.AddBehavior(new SlowModifierForTagModel(Bfb, Bfb, Name, 1, false, false, .3f, false));
             proj.AddBehavior(new SlowModifierForTagModel(Ddt, Ddt, Name, 1, false, false, .3f, false));
             proj.AddBehavior(new SlowModifierForTagModel(Zomg, Zomg, Name, 1, false, false, .1f, false));
-            
+
             proj.UpdateCollisionPassList();
         });
     }
