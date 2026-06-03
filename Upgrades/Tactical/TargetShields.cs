@@ -20,8 +20,22 @@ public class TargetShields : CareerPathUpgrade<Tactical>
         {
             if (model.HasBehavior<DamageModel>())
             {
-                model.AddBehavior(new DamageModifierForTagModel(Fortified, Fortified, 1.2f, 2, false, true));
-                model.AddBehavior(new DamageModifierForTagModel(Ceramic, Ceramic, 1.2f, 2, false, true));
+                model.AddBehavior(DamageModifierForTagModel.Create(new()
+                {
+                    name = Fortified,
+                    tag = Fortified,
+                    damageMultiplier = 1.2f,
+                    damageAddative = 2,
+                    applyOverMaxDamage = true
+                }));
+                model.AddBehavior(DamageModifierForTagModel.Create(new()
+                {
+                    name = Ceramic,
+                    tag = Ceramic,
+                    damageMultiplier = 1.2f,
+                    damageAddative = 2,
+                    applyOverMaxDamage = true
+                }));
                 model.hasDamageModifiers = true;
             }
         });

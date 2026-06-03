@@ -24,12 +24,22 @@ public class PhaseVariance : ModUpgrade<StarshipEnterprise>
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         var weapon = towerModel.FindDescendant<WeaponModel>("Phaser");
-        weapon.AddBehavior(new CritMultiplierModel("", 10, 10, 10,
-            new DisplayModel("", CreatePrefabReference(null), 0, DisplayCategory.Projectile), true));
+        weapon.AddBehavior(CritMultiplierModel.Create(new()
+        {
+            damage = 10,
+            lower = 10,
+            upper = 10,
+            displayModel = DisplayModel.Create(new() { category = DisplayCategory.Projectile }),
+            distributeToChildren = true
+        }));
 
         var projectile = towerModel.FindDescendant<ProjectileModel>("Phaser");
-        projectile.AddBehavior(new ShowTextOnHitModel("Phaser",
-            CreatePrefabReference("6eaf39977c73cf340b1ce55689e7a4e2"), 1, false, ""));
+        projectile.AddBehavior(ShowTextOnHitModel.Create(new()
+        {
+            name = "Phaser",
+            assetId = CreatePrefabReference("6eaf39977c73cf340b1ce55689e7a4e2"),
+            lifespan = 1
+        }));
     }
     
     /// <summary>

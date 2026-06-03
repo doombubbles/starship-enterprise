@@ -19,7 +19,7 @@ public class AttackPatternOmega : CareerPathUpgrade<Tactical>
         {
             if (projectile.HasBehavior<DamageModel>())
             {
-                projectile.AddBehavior(new DamagePercentOfMaxModel("", .005f, new Il2CppStringArray(0), false));
+                projectile.AddBehavior(DamagePercentOfMaxModel.Create(new() { percent = .005f, tags = new Il2CppStringArray(0) }));
             }
         });
     }

@@ -62,7 +62,7 @@ public class Science : CareerPath
                 arcEmission.RemoveBehavior<EmissionRotationOffBloonDirectionModel>();
                 if (!towerToAddTo.HasDescendant<ArcEmissionModel>())
                 {
-                    attackModel.GetChild<WeaponModel>().SetEmission(new SingleEmissionModel("", null));
+                    attackModel.GetChild<WeaponModel>().SetEmission(SingleEmissionModel.Create());
                     if (tier >= 3)
                     {
                         attackModel.GetChild<WeaponModel>().Rate /= 3;
@@ -141,12 +141,12 @@ public class Science : CareerPath
                 if (emissionModel.Is<ArcEmissionModel>())
                 {
                     emissionModel
-                        .AddBehavior(new EmissionArcRotationOffTowerDirectionModel("", -rotate.additionalRotation));
+                        .AddBehavior(EmissionArcRotationOffTowerDirectionModel.Create(new() { offsetRotation = -rotate.additionalRotation }));
                 }
                 else
                 {
                     emissionModel
-                        .AddBehavior(new EmissionRotationOffTowerDirectionModel("", -rotate.additionalRotation));
+                        .AddBehavior(EmissionRotationOffTowerDirectionModel.Create(new() { offsetRotation = -rotate.additionalRotation }));
                 }
             }
         }
@@ -158,20 +158,24 @@ public class Science : CareerPath
                 var effect = weaponModel.GetDescendant<CreateEffectOnContactModel>().effectModel;
 
                 weaponModel.SetProjectile(explosion);
-                weaponModel.AddBehavior(new EjectEffectModel("", effect, effect.lifespan,
-                    effect.fullscreen, false, false, false, false));
+                weaponModel.AddBehavior(EjectEffectModel.Create(new()
+                {
+                    effectModel = effect,
+                    lifespan = effect.lifespan,
+                    fullscreen = effect.fullscreen
+                }));
                 break;
             case PrimeDirectiveMode.PhotonTorpedoOnPoint:
                 weaponModel.SetEmission(towerToAddTo.GetDescendant<RandomTargetSpreadModel>().Duplicate());
-                weaponModel.projectile.AddBehavior(new InstantModel("", true, false, false));
-                weaponModel.projectile.AddBehavior(new AgeModel("", .1f, 0, false, null));
+                weaponModel.projectile.AddBehavior(InstantModel.Create(new() { destroyIfInvalid = true }));
+                weaponModel.projectile.AddBehavior(AgeModel.Create(new() { lifespan = .1f }));
                 weaponModel.projectile.RemoveBehavior<TravelStraitModel>();
                 weaponModel.projectile.RemoveBehavior<TrackTargetModel>();
                 towerToAddTo.GetAttackModel().AddWeapon(weaponModel);
                 return true;
             case PrimeDirectiveMode.PhotonTorpedoOnTarget:
-                attackModel.GetChild<WeaponModel>().SetEmission(new InstantDamageEmissionModel("", null));
-                weaponModel.projectile.AddBehavior(new InstantModel("", true, false, false));
+                attackModel.GetChild<WeaponModel>().SetEmission(InstantDamageEmissionModel.Create());
+                weaponModel.projectile.AddBehavior(InstantModel.Create(new() { destroyIfInvalid = true }));
                 weaponModel.projectile.RemoveBehavior<TravelStraitModel>();
                 break;
             case PrimeDirectiveMode.PhaseCannonSpread:

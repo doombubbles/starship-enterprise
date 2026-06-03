@@ -25,7 +25,7 @@ public class FireAtWill : ModUpgrade<StarshipEnterprise>
 
         phaserStrong.RemoveBehaviors<TargetSupplierModel>();
         phaserStrong.RemoveChildDependant(phaserStrong.targetProvider);
-        phaserStrong.targetProvider = new TargetStrongAirUnitModel("", false, false);
+        phaserStrong.targetProvider = TargetStrongAirUnitModel.Create();
         phaserStrong.AddBehavior(phaserStrong.targetProvider);
 
         phaserStrong.GetChild<WeaponModel>().ejectX = -10;
@@ -37,7 +37,7 @@ public class FireAtWill : ModUpgrade<StarshipEnterprise>
         
         phaserClose.RemoveBehaviors<TargetSupplierModel>();
         phaserClose.RemoveChildDependant(phaserClose.targetProvider);
-        phaserClose.targetProvider = new TargetCloseAirUnitModel("", false, false);
+        phaserClose.targetProvider = TargetCloseAirUnitModel.Create();
         phaserClose.AddBehavior(phaserClose.targetProvider);
         
         phaserClose.GetChild<WeaponModel>().ejectX = 10;

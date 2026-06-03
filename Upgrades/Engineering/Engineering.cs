@@ -44,12 +44,13 @@ public class Engineering : CareerPath
         fighterMovement.rollTimeBeforeNext = 1000000000;
         fighterMovement.bankAngleMax = 30;
 
-        shuttle.AddBehavior(new AttackHelper
+        shuttle.AddBehavior(AttackModel.Create(new()
         {
-            Range = 2000,
-            AttackThroughWalls = true,
-            TargetProvider = targetProvider
-        });
+            range = 2000,
+            attackThroughWalls = true,
+            targetProvider = targetProvider,
+            behaviors = [targetProvider]
+        }));
 
         /*shuttle.AddBehavior(new AttackModel("", new Il2CppReferenceArray<WeaponModel>(0), 2000f, new Model[]
         {
@@ -85,10 +86,10 @@ public class Engineering : CareerPath
 
         var targetProviders = new TargetSupplierModel[]
         {
-            new FighterPilotPatternFirstModel("", false, 40, true),
-            new FighterPilotPatternStrongModel("", false, 40, true),
-            new FighterPilotPatternLastModel("", false, 40, true),
-            new FighterPilotPatternCloseModel("", false, 40, true)
+            FighterPilotPatternFirstModel.Create(new() { offsetDistance = 40, isOnSubTower = true }),
+            FighterPilotPatternStrongModel.Create(new() { offsetDistance = 40, isOnSubTower = true }),
+            FighterPilotPatternLastModel.Create(new() { offsetDistance = 40, isOnSubTower = true }),
+            FighterPilotPatternCloseModel.Create(new() { offsetDistance = 40, isOnSubTower = true })
         };
 
         for (var i = 0; i < howMany; i++)
@@ -109,7 +110,12 @@ public class Engineering : CareerPath
 
             shuttle.GetDescendant<FighterMovementModel>().maxSpeed += i;
 
-            towerModel.AddBehavior(new TowerCreateTowerModel(name, shuttle, true));
+            towerModel.AddBehavior(TowerCreateTowerModel.Create(new()
+            {
+                name = name,
+                towerModel = shuttle,
+                isAirBasedTower = true
+            }));
         }
 
         towerModel.UpdateTargetProviders();

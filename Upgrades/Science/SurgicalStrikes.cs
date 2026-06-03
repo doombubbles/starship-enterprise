@@ -21,8 +21,15 @@ public class SurgicalStrikes : CareerPathUpgrade<Science>
         {
             if (projectile.HasBehavior<DamageModel>())
             {
-                projectile.AddBehavior(new RemoveBloonModifiersModel("", true, true, false, true, true,
-                    new Il2CppStringArray(0), new Il2CppStringArray(0)));
+                projectile.AddBehavior(RemoveBloonModifiersModel.Create(new()
+                {
+                    cleanseRegen = true,
+                    cleanseCamo = true,
+                    cleanseFortified = true,
+                    cleanseOnlyIfDamaged = true,
+                    bloonTagExcludeList = new Il2CppStringArray(0),
+                    bloonTagExplicitList = new Il2CppStringArray(0)
+                }));
                 projectile.UpdateCollisionPassList();
             }
         });

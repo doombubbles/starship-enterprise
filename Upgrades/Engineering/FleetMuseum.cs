@@ -27,7 +27,7 @@ public class FleetMuseum : CareerPathUpgrade<Engineering>
     {
         towerModel.FindDescendant<AbilityModel>(nameof(EjectTheWarpCore))
             .GetDescendant<ProjectileModel>()
-            .AddBehavior(new DamagePercentOfMaxModel("", .5f, new Il2CppStringArray(0), false));
+            .AddBehavior(DamagePercentOfMaxModel.Create(new() { percent = .5f, tags = new Il2CppStringArray(0) }));
 
         var refits = GetContent<RefitUpgrade>()
             .Where(upgrade => towerModel.appliedUpgrades.Contains(upgrade.Id))
@@ -55,7 +55,7 @@ public class FleetMuseum : CareerPathUpgrade<Engineering>
         var name = display.guidRef.Replace("StarshipEnterprise-", "").Replace("Display", "");
 
         var shuttle = Engineering.GetBaseShuttle(name, display,
-            new FighterPilotPatternFirstModel("", false, 40, true));
+            FighterPilotPatternFirstModel.Create(new() { offsetDistance = 40, isOnSubTower = true }));
 
         foreach (var attackModel in towerModel.GetAttackModels().Skip(1))
         {
@@ -72,6 +72,11 @@ public class FleetMuseum : CareerPathUpgrade<Engineering>
             weapon.Rate *= buffReductionFactor;
         });
 
-        towerModel.AddBehavior(new TowerCreateTowerModel(name, shuttle, true));
+        towerModel.AddBehavior(TowerCreateTowerModel.Create(new()
+        {
+            name = name,
+            towerModel = shuttle,
+            isAirBasedTower = true
+        }));
     }
 }

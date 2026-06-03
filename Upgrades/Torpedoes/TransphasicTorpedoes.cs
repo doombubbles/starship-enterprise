@@ -28,9 +28,15 @@ public class TransphasicTorpedoes : UpgradePlusPlus<PhotonTorpedoPath>
             foreach (var (tag, layerNumbers) in Game.instance.model.bloons.GroupBy(bloonModel => bloonModel.baseId,
                          bloonModel => bloonModel.layerNumber))
             {
-                model.AddBehavior(new DamageModifierForBloonTypeModel(tag, tag, layerNumbers.First(), 0, true));
+                model.AddBehavior(DamageModifierForBloonTypeModel.Create(new()
+                {
+                    name = tag,
+                    bloonId = tag,
+                    damageMultiplier = layerNumbers.First(),
+                    includeChildren = true
+                }));
             }
-            model.AddBehavior(new StripChildrenModel("", ""));
+            model.AddBehavior(StripChildrenModel.Create());
 
             model.hasDamageModifiers = true;
         });

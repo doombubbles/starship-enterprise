@@ -1,1 +1,2 @@
-- Fixed for BTD6 v51.1
+- Updated for BTD6 v55
+- Switched some internals to new Mod Helper extensions

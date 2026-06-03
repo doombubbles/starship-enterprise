@@ -5,21 +5,17 @@
         <Configurations>Debug;Release</Configurations>
         <Nullable>enable</Nullable>
         <AssemblyName>StarshipEnterprise</AssemblyName>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>preview</LangVersion>
         <Optimize>true</Optimize>
         <DebugType>embedded</DebugType>
+        <Dependencies>PathsPlusPlus</Dependencies>
     </PropertyGroup>
+
     <ItemGroup>
       <Content Include=".github\workflows\build.yml" />
     </ItemGroup>
 
     <Import Project="..\btd6.targets" />
-
-    <ItemGroup>
-        <Reference Include="PathsPlusPlus">
-            <HintPath>$(BloonsTD6)\Mods\PathsPlusPlus.dll</HintPath>
-        </Reference>
-    </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="Unity\**" />

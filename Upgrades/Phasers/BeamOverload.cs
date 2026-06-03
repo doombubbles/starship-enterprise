@@ -21,39 +21,64 @@ public class BeamOverload : ModUpgrade<StarshipEnterprise>
     public override int Tier => 4;
 
     public override int Cost => 8000;
-    
+
     public override string Icon => Name;
 
     public override string Description =>
         "Phaser Beams create a burst of energy on contact with Bloons, also damaging other Bloons nearby.";
-    
+
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         towerModel.GetDescendants<LineProjectileEmissionModel>().ForEach(emission =>
         {
             var filters = new FilterModel[]
             {
-                new FilterInvisibleModel("", true, false)
+                FilterInvisibleModel.Create(new() { isActive = true })
             };
-            var proj = new ProjectileModel(CreatePrefabReference(""), "PhaserBlast", 10, 0, 25, 0, new Model[]
+            var proj = ProjectileModel.Create(new()
             {
-                new DisplayModel("PhaserBlast", CreatePrefabReference(""), 0, DisplayCategory.Projectile),
-                new AgeModel("PhaserBlast", .2f, 0, false, null),
-                new ProjectileFilterModel("PhaserBlast", filters),
-                new DamageModel("PhaserBlast", 2, 0, true, false, true, BloonProperties.Purple, BloonProperties.Purple, false, false),
-                new CreateEffectOnExhaustFractionModel("PhaserBlast", 
-                    new EffectModel("", CreatePrefabReference<PhaserBlast>(), 1, .2f, Fullscreen.No, false, false,
-                        false, false, false, false), .2f, Fullscreen.No, 0, 1, true)
-            }, filters);
-            proj.UpdateCollisionPassList();
+                id = "PhaserBlast",
+                radius = 10,
+                pierce = 25,
+                behaviors =
+                [
+                    DisplayModel.Create(new()
+                    {
+                        name = "PhaserBlast",
+                        category = DisplayCategory.Projectile
+                    }),
+                    AgeModel.Create(new() { name = "PhaserBlast", lifespan = .2f }),
+                    ProjectileFilterModel.Create(new() { name = "PhaserBlast", filters = filters }),
+                    DamageModel.Create(new()
+                    {
+                        name = "PhaserBlast",
+                        damage = 2,
+                        immuneBloonProperties = BloonProperties.Purple,
+                        immuneBloonPropertiesOriginal = BloonProperties.Purple
+                    }),
+                    CreateEffectOnExhaustFractionModel.Create(new()
+                    {
+                        name = "PhaserBlast",
+                        effectModel = EffectModel.Create(new()
+                        {
+                            assetId = CreatePrefabReference<PhaserBlast>(),
+                            lifespan = .2f
+                        }),
+                        lifespan = .2f,
+                        durationFraction = 1,
+                        randomRotation = true
+                    })
+                ],
+                filters = filters
+            });
             emission.projectileInitialHitModel = proj;
             emission.AddChildDependant(proj);
             emission.endProjectileSharesPierce = true;
-            emission.emissionAtEndModel = new SingleEmissionModel("", null);
+            emission.emissionAtEndModel = SingleEmissionModel.Create();
             emission.AddChildDependant(emission.emissionAtEndModel);
         });
-        
-        
+
+
         foreach (var damageModel in towerModel.FindDescendants<ProjectileModel>("Phaser")
                      .SelectMany(model => model.FindDescendants<DamageModel>()))
         {

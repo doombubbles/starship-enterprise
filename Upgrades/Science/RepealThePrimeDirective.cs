@@ -29,8 +29,17 @@ public class RepealThePrimeDirective : CareerPathUpgrade<Science>
         buff.mutatorId = Name;
 
         var buffIcon = GetInstance<BuffIconRepealThePrimeDirective>();
-        towerModel.AddBehavior(new RateSupportModel(Name, 1f, true, Name, true, -1, null, buffIcon.BuffLocsName,
-            buffIcon.BuffIconName));
+        towerModel.AddBehavior(RateSupportModel.Create(new()
+        {
+            name = Name,
+            multiplier = 1f,
+            isUnique = true,
+            mutatorId = Name,
+            isGlobal = true,
+            priority = -1,
+            buffLocsName = buffIcon.BuffLocsName,
+            buffIconName = buffIcon.BuffIconName
+        }));
     }
 
     public class BuffIconRepealThePrimeDirective : ModBuffIcon

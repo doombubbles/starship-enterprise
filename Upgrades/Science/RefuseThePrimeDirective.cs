@@ -32,29 +32,52 @@ public class RefuseThePrimeDirective : CareerPathUpgrade<Science>
     {
         var buffIcon = GetInstance<BuffIconRefuseThePrimeDirective>();
 
-        towerModel.AddBehavior(new AbilityHelper(Name)
+        towerModel.AddBehavior(AbilityModel.Create(new()
         {
-            DisplayName = DisplayName,
-            Description = Description,
-            Animation = -1,
-            IconReference = IconReference,
+            name = Name,
+            displayName = DisplayName,
+            description = Description,
+            animation = -1,
+            icon = IconReference,
             Cooldown = 60,
-            Behaviors =
+            behaviors =
             [
-                new ActivateRateSupportZoneModel("", Name, true, 1f, 99999, 99999, false, 20f,
-                    new DisplayModel("", CreatePrefabReference<PrimeDirectiveBuff>(), 0, DisplayCategory.Buff),
-                    buffIcon.BuffLocsName, buffIcon.BuffIconName, new TowerFilterModel[]
-                    {
-                        new FilterInBaseTowerIdModel("", Science.PrimeDirectiveModes.Keys.ToArray())
-                    }, false),
-                new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
+                ActivateRateSupportZoneModel.Create(new()
                 {
-                    guidRef =
-                        "8c509ff34947707469192054a463f6b7" // Assets/Monkeys/EngineerMonkey/SoundPrefabs/AbilityOverclock.prefab
-                }), null, null)
+                    mutatorId = Name,
+                    isUnique = true,
+                    rateModifier = 1f,
+                    range = 99999,
+                    maxNumTowersModified = 99999,
+                    lifespan = 20f,
+                    displayModel = DisplayModel.Create(new()
+                    {
+                        display = CreatePrefabReference<PrimeDirectiveBuff>(),
+                        category = DisplayCategory.Buff
+                    }),
+                    buffLocsName = buffIcon.BuffLocsName,
+                    buffIconName = buffIcon.BuffIconName,
+                    filters =
+                    [
+                        FilterInBaseTowerIdModel.Create(new()
+                        {
+                            baseIds = Science.PrimeDirectiveModes.Keys.ToArray()
+                        })
+                    ]
+                }),
+                CreateSoundOnAbilityModel.Create(new()
+                {
+                    sound = SoundModel.Create(new()
+                    {
+                        assetId = new AudioClipReference
+                        {
+                            guidRef = "8c509ff34947707469192054a463f6b7"
+                        }
+                    })
+                })
             ],
-            AddedViaUpgrade = Id
-        });
+            addedViaUpgrade = Id
+        }));
     }
 
     public class BuffIconRefuseThePrimeDirective : ModBuffIcon

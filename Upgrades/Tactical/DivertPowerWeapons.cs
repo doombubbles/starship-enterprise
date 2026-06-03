@@ -29,30 +29,49 @@ public class DivertPowerWeapons : CareerPathUpgrade<Tactical>
     public override void ApplyUpgrade(TowerModel towerModel)
     {
         var buffIcon = GetInstance<BuffIconDivertPowerWeapons>();
-        towerModel.AddBehavior(new AbilityHelper(Name)
+        towerModel.AddBehavior(AbilityModel.Create(new()
         {
-            DisplayName = DisplayName,
-            Description = Description,
-            Animation = -1,
-            IconReference = IconReference,
+            name = Name,
+            displayName = DisplayName,
+            description = Description,
+            animation = -1,
+            icon = IconReference,
             Cooldown = 60,
-            Behaviors =
+            behaviors =
             [
-                new ActivateRateSupportZoneModel(Name, Name, true, .5f, towerModel.radius, 1, true, 20f, null,
-                    buffIcon.BuffLocsName, buffIcon.BuffIconName, new[]
-                    {
-                        new FilterInBaseTowerIdModel("", new[]
-                        {
-                            Path.Tower
-                        })
-                    }, false),
-                new CreateSoundOnAbilityModel("", new SoundModel("", new AudioClipReference
+                ActivateRateSupportZoneModel.Create(new()
                 {
-                    guidRef = "c72781a0643d41c4b976110d1516fabc" // ActivatedTurboChargeSound.prefab
-                }), null, null)
+                    name = Name,
+                    mutatorId = Name,
+                    isUnique = true,
+                    rateModifier = .5f,
+                    range = towerModel.radius,
+                    maxNumTowersModified = 1,
+                    canEffectThisTower = true,
+                    lifespan = 20f,
+                    buffLocsName = buffIcon.BuffLocsName,
+                    buffIconName = buffIcon.BuffIconName,
+                    filters =
+                    [
+                        FilterInBaseTowerIdModel.Create(new()
+                        {
+                            baseIds = [Path.Tower]
+                        })
+                    ]
+                }),
+                CreateSoundOnAbilityModel.Create(new()
+                {
+                    sound = SoundModel.Create(new()
+                    {
+                        assetId = new AudioClipReference
+                        {
+                            guidRef = "c72781a0643d41c4b976110d1516fabc"
+                        }
+                    })
+                })
             ],
-            AddedViaUpgrade = Id
-        });
+            addedViaUpgrade = Id
+        }));
     }
 
     public class BuffIconDivertPowerWeapons : ModBuffIcon

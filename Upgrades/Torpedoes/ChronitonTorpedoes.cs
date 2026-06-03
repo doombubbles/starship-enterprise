@@ -36,13 +36,19 @@ public class ChronitonTorpedoes : ModUpgrade<StarshipEnterprise>
         {
             proj.pierce *= 1.5f;
 
-            proj.AddBehavior(new SlowModel("", .25f, 5, Name, 9999, "", true, false, null, false,
-                false, false, 0));
+            proj.AddBehavior(SlowModel.Create(new()
+            {
+                multiplier = .25f,
+                lifespan = 5,
+                mutationId = Name,
+                layers = 9999,
+                isUnique = true
+            }));
 
-            proj.AddBehavior(new SlowModifierForTagModel(Moab, Moab, Name, 1, false, false, .5f, false));
-            proj.AddBehavior(new SlowModifierForTagModel(Bfb, Bfb, Name, 1, false, false, .3f, false));
-            proj.AddBehavior(new SlowModifierForTagModel(Ddt, Ddt, Name, 1, false, false, .3f, false));
-            proj.AddBehavior(new SlowModifierForTagModel(Zomg, Zomg, Name, 1, false, false, .1f, false));
+            proj.AddBehavior(SlowModifierForTagModel.Create(new() { name = Moab, tag = Moab, slowId = Name, slowMultiplier = 1, lifespanOverride = .5f }));
+            proj.AddBehavior(SlowModifierForTagModel.Create(new() { name = Bfb, tag = Bfb, slowId = Name, slowMultiplier = 1, lifespanOverride = .3f }));
+            proj.AddBehavior(SlowModifierForTagModel.Create(new() { name = Ddt, tag = Ddt, slowId = Name, slowMultiplier = 1, lifespanOverride = .3f }));
+            proj.AddBehavior(SlowModifierForTagModel.Create(new() { name = Zomg, tag = Zomg, slowId = Name, slowMultiplier = 1, lifespanOverride = .1f }));
 
             proj.UpdateCollisionPassList();
         });

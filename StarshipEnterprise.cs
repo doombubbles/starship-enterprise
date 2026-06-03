@@ -86,9 +86,9 @@ public class StarshipEnterprise : ModTower<Starfleet>
 
         towerModel.UpdateTargetProviders();
 
-        towerModel.ApplyDisplay<StarfleetBase>();
+        towerModel.SetDisplay<StarfleetBase>();
         towerModel.RemoveBehavior<RectangleFootprintModel>();
-        towerModel.AddBehavior(new CircleFootprintModel("", 12, false, false, false));
+        towerModel.AddBehavior(CircleFootprintModel.Create(new() { radius = 12 }));
 
         var dartMonkey = Game.instance.model.GetTowerFromId(TowerType.DartMonkey);
 
@@ -109,11 +109,11 @@ public class StarshipEnterprise : ModTower<Starfleet>
         var phaserBeam = phaserWeapon.GetChild<LineProjectileEmissionModel>();
 
         phaserAttack.RemoveBehaviors<CirclePatternModel>();
-        phaserAttack.targetProvider = new TargetFirstAirUnitModel("", false, false);
+        phaserAttack.targetProvider = TargetFirstAirUnitModel.Create();
         phaserAttack.AddBehavior(phaserAttack.targetProvider);
         phaserAttack.offsetY = 0;
 
-        phaserWeapon.AddBehavior(new FireFromAirUnitModel(""));
+        phaserWeapon.AddBehavior(FireFromAirUnitModel.Create());
         phaserWeapon.SetEject(EjectOffset);
         phaserWeapon.Rate = 1f;
 
@@ -134,14 +134,15 @@ public class StarshipEnterprise : ModTower<Starfleet>
         var etienne = Game.instance.model.GetHeroWithNameAndLevel(TowerType.Etienne, 10);
         var ucav = etienne.GetDescendant<UCAVModel>().ucavTowerModel;
         var ucavAttack = ucav.GetAttackModel().Duplicate();
-        var torpedoAttack = new AttackHelper("PhotonTorpedo")
+        var torpedoAttack = AttackModel.Create(new()
         {
-            Weapons = ucavAttack.weapons,
-            Range = ucavAttack.range,
-            Behaviors = ucavAttack.behaviors,
-            TargetProvider = new TargetStrongAirUnitModel("", false, false),
-            AttackThroughWalls = true
-        }.Model;
+            name = "PhotonTorpedo",
+            weapons = ucavAttack.weapons,
+            range = ucavAttack.range,
+            behaviors = ucavAttack.behaviors,
+            targetProvider = TargetStrongAirUnitModel.Create(),
+            attackThroughWalls = true
+        });
         /*var torpedoAttack = new AttackModel("PhotonTorpedo", ucavAttack.weapons, ucavAttack.range, ucavAttack.behaviors,
             new TargetStrongAirUnitModel("", false, false), 0, 0, 0, true, false, 0, false, 0, false);*/
         var torpedoWeapon = torpedoAttack.GetChild<WeaponModel>().SetName("PhotonTorpedo");
@@ -153,9 +154,19 @@ public class StarshipEnterprise : ModTower<Starfleet>
         torpedoAttack.AddBehavior(torpedoAttack.targetProvider);
 
         torpedoWeapon.SetEject(EjectOffset);
-        torpedoWeapon.SetEmission(new RandomArcEmissionModel("PhotonTorpedo", 1, 0, 0, 90, 0, new[]
+        torpedoWeapon.SetEmission(RandomArcEmissionModel.Create(new()
         {
-            new EmissionRotationOffBloonDirectionModel("", true, true)
+            name = "PhotonTorpedo",
+            count = 1,
+            randomAngle = 90,
+            behaviors =
+            [
+                EmissionRotationOffBloonDirectionModel.Create(new()
+                {
+                    useAirUnitPosition = true,
+                    dontSetAfterEmit = true
+                })
+            ]
         }));
         torpedoWeapon.Rate = 2;
 
@@ -183,15 +194,19 @@ public class StarshipEnterprise : ModTower<Starfleet>
 
         phaseCannonAttack.GetDescendant<FilterTargetAngleModel>().fieldOfView = 90;
         phaseCannonAttack.RemoveBehaviors<TargetSupplierModel>();
-        phaseCannonAttack.targetProvider = new TargetFirstAirUnitModel("", false, false);
+        phaseCannonAttack.targetProvider = TargetFirstAirUnitModel.Create();
         phaseCannonAttack.AddBehavior(phaseCannonAttack.targetProvider);
 
         phaseCannonWeapon.SetEject(EjectOffset);
         phaseCannonWeapon.Rate = .5f;
 
-        phaseCannonWeapon.SetEmission(new ParallelEmissionModel("", 1, 0, 0, false, new[]
+        phaseCannonWeapon.SetEmission(ParallelEmissionModel.Create(new()
         {
-            new EmissionRotationOffBloonDirectionModel("", true, false)
+            count = 1,
+            behaviors =
+            [
+                EmissionRotationOffBloonDirectionModel.Create(new() { useAirUnitPosition = true })
+            ]
         }));
         phaseCannonWeapon.RemoveBehaviors<ThrowMarkerOffsetModel>();
 

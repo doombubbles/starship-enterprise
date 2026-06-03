@@ -19,7 +19,14 @@ public class ResistanceIsFutile : CareerPathUpgrade<Tactical>
         {
             if (model.HasBehavior<DamageModel>())
             {
-                model.AddBehavior(new DamageModifierForTagModel(Moabs, Moabs, 1.2f, 2, false, true));
+                model.AddBehavior(DamageModifierForTagModel.Create(new()
+                {
+                    name = Moabs,
+                    tag = Moabs,
+                    damageMultiplier = 1.2f,
+                    damageAddative = 2,
+                    applyOverMaxDamage = true
+                }));
                 model.hasDamageModifiers = true;
             }
         });
